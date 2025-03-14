@@ -6,8 +6,11 @@ import os
 app = Flask(__name__)
 CORS(app)  # Allow frontend to communicate with backend
 
-# Set API Key (Replace with your actual Gemini API key)
-GEMINI_API_KEY = "AIzaSyAiYwLFrZMoH5p-YCMW2vKe2zhbgrbteSk"
+# Securely get API Key from environment variables
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  
+if not GEMINI_API_KEY:
+    raise ValueError("⚠️ ERROR: GEMINI_API_KEY is not set in environment variables!")
+
 genai.configure(api_key=GEMINI_API_KEY)
 
 @app.route("/", methods=["GET"])
@@ -29,4 +32,5 @@ def summarize_text():
     return jsonify({"summary": summary})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use Render’s assigned port or default to 5000
+    app.run(host="0.0.0.0", port=port, debug=True)
