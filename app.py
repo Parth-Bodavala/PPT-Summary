@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)  # Allow frontend to communicate with backend
 
 # Securely get API Key from environment variables
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  
+GEMINI_API_KEY = os.getenv("AIzaSyAiYwLFrZMoH5p-YCMW2vKe2zhbgrbteSk")  
 if not GEMINI_API_KEY:
     raise ValueError("⚠️ ERROR: GEMINI_API_KEY is not set in environment variables!")
 
